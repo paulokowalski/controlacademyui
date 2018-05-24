@@ -1,0 +1,58 @@
+<div class="container">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Mensalidades</h1>
+      </div>
+      <div class="ui-g-12 ui-fluid">
+        <label>Pessoa</label>
+        <input type="text" pInputText />
+      </div>
+
+      <div class="ui-g-12">
+          <label style="display: block">Vencimento</label>
+          <input type="text" pInputText style="width: 95px;"/>
+
+          <label>até</label>
+          <input type="text" pInputText style="width: 95px;"/>
+      </div>
+
+      <div class="ui-g-12">
+          <button pButton type="submit" label="Pesquisar" ></button>
+      </div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <p-dataTable [value]="mensalidades" [paginator]="true" [rows]="3" [responsive]="true">
+          <p-column field="pessoa" header="Pessoa"></p-column>
+          <p-column field="dataVencimento" header="Vencimento" styleClass="col-data">
+              <ng-template let-lanc="rowData" pTemplate="body">
+                  <span>{{lanc.dataVencimento | date:'dd/MM/y'}}</span>
+                </ng-template>
+          </p-column>
+          <p-column field="dataPagamento" header="Pagamento" styleClass="col-data">
+              <ng-template let-lanc="rowData" pTemplate="body">
+                  <span>{{lanc.dataPagamento | date:'dd/MM/y'}}</span>
+                </ng-template>
+          </p-column>
+          <p-column field="valor" header="Valor" styleClass="col-valor">
+              <ng-template let-lanc="rowData" pTemplate="body">
+                  <span>{{lanc.valor | number:'1.2-2'}}</span>
+                </ng-template>
+          </p-column>
+          <p-column styleClass="col-acoes">
+              <ng-template pTemplate="body">
+                <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+                <button pButton icon="fa-trash" pTooltip="Remover" tooltipPosition="top"></button>
+              </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+        <button pButton type="submit" label="Nova Mensalidade" ></button>
+    </div>
+
+  </div>

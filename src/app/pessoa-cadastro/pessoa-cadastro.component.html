@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Cadastro Pessoa</h1>
+    </div>
+    <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
+      <div class="ui-g-6 ui-fluid">
+          <label>Nome</label>
+          <input type="text" pInputText ngModel name="nome">
+      </div>
+      <div class="ui-g-6 ui-fluid">
+          <label>Email</label>
+          <input type="text" pInputText ngModel name="email">
+      </div>
+      <div class="ui-g-6 ui-fluid">
+          <label>Cpf</label>
+          <input type="text" pInputText ngModel name="cpf">
+      </div>
+      <div class="ui-g-6 ui-fluid">
+          <label>Data de Nascimento</label>
+          <input type="text" pInputText ngModel name="dataNascimento">
+      </div>
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="submit" label="Voltar pesquisa" routerLink="/pessoas"></button>
+      </div>
+    </form>
+  </div>
+</div>

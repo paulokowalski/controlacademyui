@@ -16,18 +16,23 @@
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-dataTable [value]="pessoas" [paginator]="true" [rows]="3" [responsive]="true">
+        <p-dataTable [value]="pessoas" [paginator]="true" [rows]="10" [responsive]="true" emptyMessage="Sem resultado">
           <p-column field="nome" header="Nome"></p-column>
-          <p-column field="cidade" header="Cidade" styleClass="col-data"></p-column>
-          <p-column field="estado" header="Estado" styleClass="col-data"></p-column>
-          <p-column field="status" header="Status" styleClass="col-valor">
+          <p-column field="cpf" header="Cpf"></p-column>
+          <p-column field="email" header="Email"></p-column>
+          <p-column field="endereco.cidade" header="Cidade" styleClass="col-data"></p-column>
+          <p-column field="endereco.estado" header="Estado" styleClass="col-data"></p-column>
+          <p-column field="ativo" header="Status" styleClass="col-valor">
             <ng-template let-lanc="rowData" pTemplate="body">
-              <span>{{lanc.status ? 'Ativo' : 'Inativo'}}</span>
+              <span>{{lanc.ativo ? 'Ativo' : 'Inativo'}}</span>
             </ng-template>
           </p-column>
           <p-column styleClass="col-acoes">
-              <ng-template pTemplate="body">
-                <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+              <ng-template let-lanc="rowData" pTemplate="body">
+                <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"
+                  [routerLink]="['/pessoas', lanc.codigo]">
+
+                </button>
                 <button pButton icon="fa-trash" pTooltip="Remover" tooltipPosition="top"></button>
               </ng-template>
           </p-column>

@@ -1,57 +1,51 @@
-import { browser } from 'protractor';
-
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { GrowlModule } from 'primeng/growl';
+import { FormLoginComponent } from './seguranca/form-login/form-login.component';
+import { SegurancaModule } from './seguranca/seguranca.module';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { DataTableModule } from 'primeng/datatable';
-import { TooltipModule } from 'primeng/tooltip';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { CalendarModule } from 'primeng/calendar';
+import { MensalidadePesquisaComponent } from './mensalidades/mensalidade-pesquisa/mensalidade-pesquisa.component';
+import { PessoaCadastroComponent } from './pessoas/pessoa-cadastro/pessoa-cadastro.component';
+import { PessoaPesquisaComponent } from './pessoas/pessoa-pesquisa/pessoa-pesquisa.component';
+
+import { PessoaService } from './pessoa-service';
+import { CoreModule } from './core/core.module';
+import { PessoasModule } from './pessoas/pessoas.module';
+import { MensalidadesModule } from './mensalidades/mensalidades.module';
+import { browser } from 'protractor';
 
 import { AppComponent } from './app.component';
-import { MensalidadePesquisaComponent } from './mensalidade-pesquisa/mensalidade-pesquisa.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
-import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
-import { HomeComponent } from './home/home.component';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'mensalidades', component: MensalidadePesquisaComponent},
+  {path: 'login', component: FormLoginComponent},
   {path: 'pessoas', component: PessoaPesquisaComponent},
-  {path: 'pessoas/novo', component: PessoaCadastroComponent}
+  {path: 'mensalidades', component: MensalidadePesquisaComponent},
+  {path: 'pessoas/novo', component: PessoaCadastroComponent},
+  {path: 'pessoas/:codigo', component: PessoaCadastroComponent},
+  {path: 'pessoas/:codigo/remove', component: PessoaCadastroComponent}
 ];
-
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MensalidadePesquisaComponent,
-    NavbarComponent,
-    PessoaPesquisaComponent,
-    PessoaCadastroComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    InputTextModule,
-    ButtonModule,
-    DataTableModule,
-    TooltipModule,
-    FormsModule,
-    DropdownModule,
+    BrowserAnimationsModule,
+    MensalidadesModule,
+    PessoasModule,
+    CoreModule,
+    SegurancaModule,
+    HttpModule,
     RouterModule.forRoot(routes),
-    InputSwitchModule,
-    CalendarModule,
-    BrowserAnimationsModule
+    GrowlModule
   ],
-  providers: [],
+  providers: [PessoaService, MessageService,
+  { provide: LOCALE_ID, useValue: 'pr-Br'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

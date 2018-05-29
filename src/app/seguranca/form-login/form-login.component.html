@@ -1,0 +1,17 @@
+<div class="container">
+
+  <div class="ui-g-12" style="text-align: center;">
+    <h3>Login</h3>
+  </div>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm); senha.value='';">
+    <div class="login ui-g-12">
+      <div class="ui-g-12 ui-fluid form-group">
+        <input type="text" placeholder="Email" pInputText style="width: 40%;" name="email" ngModel email required><br><br>
+        <input type="password" placeholder="Senha" pInputText style="width: 40%;" name="senha" ngModel required #senha>
+      </div>
+      <div class="ui-g-12">
+        <button type="submit" class="btn btn-primary" style="width: 40%;" [disabled]="!loginForm.valid">Acessar</button>
+      </div>
+    </div>
+  </form>
+</div>

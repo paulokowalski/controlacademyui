@@ -25,7 +25,7 @@
     <div class="ui-g">
       <div class="ui-g-12">
         <p-dataTable [value]="mensalidades" [paginator]="true" [rows]="3" [responsive]="true">
-          <p-column field="pessoa" header="Pessoa"></p-column>
+          <p-column field="pessoa.nome" header="Pessoa"></p-column>
           <p-column field="dataVencimento" header="Vencimento" styleClass="col-data">
               <ng-template let-lanc="rowData" pTemplate="body">
                   <span>{{lanc.dataVencimento | date:'dd/MM/y'}}</span>

@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>{{titlePage}}</h1>
+
+      <div class="alert alert-danger">
+        Preenche todos os campos corretamente
+      </div>
+    </div>
+
+    <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
+      <div class="ui-g-6 ui-fluid form-group">
+          <label>Nome</label>
+          <input pInputText type="text" name="nome" ngModel #nome="ngModel" [(ngModel)]="pessoa.nome" required minlength="5" [class.is-invalid]="(nome.hasError('required') || nome.hasError('nome')) && nome.touched">
+          <app-message [control]="nome" error="required" text="Informe uma descrição"></app-message>
+          <app-message [control]="nome" error="minlength" text="Informe o nome completo"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid form-group">
+          <label>Email</label>
+          <input class="form-control" [class.is-invalid]="(email.hasError('required') || email.hasError('email')) && email.touched" type="text" pInputText ngModel name="email" [(ngModel)]="pessoa.email" required email #email="ngModel">
+          <app-message [control]="email" error="required" text="Informe um email"></app-message>
+      </div>
+      <div class="ui-g-6 ui-fluid form-group">
+          <label>Cpf</label>
+          <p-inputMask mask="99999999999" ngModel name="cpf" [(ngModel)]="pessoa.cpf" required #cpf="ngModel"></p-inputMask>
+          <app-message [control]="cpf" error="required" text="Informe um cpf"></app-message>
+        </div>
+      <div class="ui-g-6 ui-fluid form-group">
+          <label>Data de Nascimento</label>
+          <p-calendar [locale]="br" dateFormat="dd/mm/yy" name="dataNascimento" [(ngModel)]="pessoa.dataNascimento"></p-calendar>
+        </div>
+      <div class="ui-g-12 ui-fluid form-group">
+          <label>Status</label><br>
+          <p-inputSwitch onLabel="Ativo" offLabel="Inativo" [(ngModel)]="pessoa.ativo" name="ativo" ></p-inputSwitch>
+      </div>
+      <div class="ui-g-12">
+        <button id="salvar" pButton type="submit" label="Salvar" [disabled]="!usuarioForm.valid"></button>
+        <button style="margin-left: 10px;" pButton type="submit" label="Voltar pesquisa" routerLink="/pessoas"></button>
+      </div>
+    </form>
+  </div>
+</div>

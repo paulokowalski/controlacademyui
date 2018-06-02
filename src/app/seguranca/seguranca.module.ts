@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth.guard';
 import { FormsModule } from '@angular/forms';
 import { FormLoginComponent } from './form-login/form-login.component';
 import { NgModule } from '@angular/core';
@@ -6,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { RequestOptions, Http } from '@angular/http';
+import { LogoutService } from './logout.service';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig(), http, options);
@@ -28,7 +30,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    }
+    },
+    AuthGuard,
+    LogoutService
   ]
 })
 export class SegurancaModule { }

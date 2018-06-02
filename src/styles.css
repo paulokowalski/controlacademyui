@@ -25,6 +25,23 @@ label {
   text-align: center;
 }
 
+.col-text{
+  text-align: left;
+  word-wrap: break-word !important;
+}
+
+.col-ativo{
+  width: 90px;
+  text-align: left;
+  word-wrap: break-word !important;
+}
+
+.col-cpf{
+  width: 130px;
+  text-align: left;
+  word-wrap: break-word !important;
+}
+
 .col-acoes{
   width: 90px;
   text-align: center;

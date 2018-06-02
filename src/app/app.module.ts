@@ -1,3 +1,5 @@
+import { HomeComponent } from './core/home/home.component';
+import { AuthGuard } from './seguranca/auth.guard';
 import { GrowlModule } from 'primeng/growl';
 import { FormLoginComponent } from './seguranca/form-login/form-login.component';
 import { SegurancaModule } from './seguranca/seguranca.module';
@@ -21,17 +23,19 @@ import { AppComponent } from './app.component';
 import { MessageService } from 'primeng/components/common/messageservice';
 
 const routes: Routes = [
-  {path: 'login', component: FormLoginComponent},
-  {path: 'pessoas', component: PessoaPesquisaComponent},
-  {path: 'mensalidades', component: MensalidadePesquisaComponent},
-  {path: 'pessoas/novo', component: PessoaCadastroComponent},
-  {path: 'pessoas/:codigo', component: PessoaCadastroComponent},
-  {path: 'pessoas/:codigo/remove', component: PessoaCadastroComponent}
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: FormLoginComponent, canActivate: [AuthGuard]},
+  {path: 'mensalidades', component: MensalidadePesquisaComponent, canActivate: [AuthGuard]},
+  {path: 'pessoas', component: PessoaPesquisaComponent, canActivate: [AuthGuard]},
+  {path: 'pessoas/novo', component: PessoaCadastroComponent, canActivate: [AuthGuard]},
+  {path: 'pessoas/:codigo', component: PessoaCadastroComponent, canActivate: [AuthGuard]},
+  {path: 'pessoas/:codigo/remove', component: PessoaCadastroComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +48,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     GrowlModule
   ],
-  providers: [PessoaService, MessageService,
-  { provide: LOCALE_ID, useValue: 'pr-Br'}],
+  providers: [PessoaService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

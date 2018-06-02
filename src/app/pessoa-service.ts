@@ -20,10 +20,11 @@ export class PessoaService {
 
   constructor(private http: AuthHttp) { }
 
-  consultar(): Promise<any> {
-      return this.http.get(`${this.consultaUrl}`)
-                      .toPromise()
-                      .then(response => response.json());
+  consultar(nome: string): Promise<any> {
+    console.log(`${this.consultaUrl}/` + (nome === '' ? '' : `consultar/` + nome));
+    return this.http.get(`${this.consultaUrl}/` + (nome === '' ? '' : `consultar/` + nome))
+                    .toPromise()
+                    .then(response => response.json());
   }
 
   consultarPorCodigo(codigo: number): Promise<Pessoa> {
@@ -68,7 +69,9 @@ export class PessoaService {
 
   private converterStringsParaDatas(pessoas: Pessoa[]) {
     for (const pessoa of pessoas) {
-      pessoa.dataNascimento = moment(pessoa.dataNascimento, 'YYYY-MM-DD').toDate();
+      if (pessoa.dataNascimento) {
+        pessoa.dataNascimento = moment(pessoa.dataNascimento, 'YYYY-MM-DD').toDate();
+      }
     }
   }
 }

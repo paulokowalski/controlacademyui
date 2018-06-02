@@ -4,25 +4,43 @@
       <div class="ui-g-12">
         <h1>Pessoas</h1>
       </div>
-      <div class="ui-g-12 ui-fluid">
+
+      <div class="ui-g-8 ui-fluid">
         <label>Pessoa</label>
-        <input type="text" pInputText />
+        <input type="text" pInputText #pessoa/>
+      </div>
+
+      <div class="ui-g-4 ui-fluid">
+          <label>Cpf</label>
+          <input type="text" pInputText #cpf/>
+      </div>
+
+      <div class="ui-g-4 ui-fluid">
+          <label>Ativo</label><br>
+          <p-inputSwitch onLabel="Ativo" offLabel="Inativo" #ativo></p-inputSwitch>
       </div>
 
       <div class="ui-g-12">
-          <button pButton type="submit" label="Pesquisar" ></button>
+          <button pButton type="submit" label="Pesquisar" (click)="pesquisar(pessoa.value)"></button>
       </div>
     </div>
 
     <div class="ui-g">
       <div class="ui-g-12">
         <p-dataTable [value]="pessoas" [paginator]="true" [rows]="10" [responsive]="true" emptyMessage="Sem resultado">
-          <p-column field="nome" header="Nome"></p-column>
-          <p-column field="cpf" header="Cpf"></p-column>
-          <p-column field="email" header="Email"></p-column>
-          <p-column field="endereco.cidade" header="Cidade" styleClass="col-data"></p-column>
-          <p-column field="endereco.estado" header="Estado" styleClass="col-data"></p-column>
-          <p-column field="ativo" header="Status" styleClass="col-valor">
+          <p-column field="nome" header="Nome" styleClass="col-text"></p-column>
+          <p-column field="dataNascimento" header="Nascimento" styleClass="col-data">
+            <ng-template let-pes="rowData" pTemplate="body">
+              {{pes.dataNascimento | date:"dd/MM/yyyy"}}
+            </ng-template>
+          </p-column>
+          <p-column field="cpf" header="Cpf" styleClass="col-cpf">
+              <ng-template let-pes="rowData" pTemplate="body">
+                {{pes.cpf | cpfMask}}
+              </ng-template>
+          </p-column>
+          <p-column field="email" header="Email" styleClass="col-text"></p-column>
+          <p-column field="ativo" header="Status" styleClass="col-ativo">
             <ng-template let-lanc="rowData" pTemplate="body">
               <span>{{lanc.ativo ? 'Ativo' : 'Inativo'}}</span>
             </ng-template>
@@ -33,7 +51,8 @@
                   [routerLink]="['/pessoas', lanc.codigo]">
 
                 </button>
-                <button pButton icon="fa-trash" pTooltip="Remover" tooltipPosition="top"></button>
+                <button pButton icon="fa-trash" pTooltip="Remover" tooltipPosition="top"
+                  (click)='remover(lanc)'></button>
               </ng-template>
           </p-column>
         </p-dataTable>

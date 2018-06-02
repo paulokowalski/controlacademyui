@@ -14,6 +14,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { SharedModule } from '../shared/shared.module';
+import { CpfPipe } from '../cpf.pipe';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   declarations: [
     PessoaPesquisaComponent,
-    PessoaCadastroComponent
+    PessoaCadastroComponent,
+    CpfPipe
   ],
   exports: [
     PessoaPesquisaComponent,

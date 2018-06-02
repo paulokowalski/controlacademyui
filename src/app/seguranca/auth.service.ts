@@ -49,17 +49,28 @@ export class AuthService {
                     .toPromise()
                     .then(response => {
                       this.armazenarToken(response.json().access_token);
-                      console.log('Novo access token');
                       return Promise.resolve(null);
                     })
                     .catch(response => {
-                      console.error('Error ao renovar token', response);
                       return Promise.resolve(null);
                     });
   }
 
   temPermissao(permissao: string) {
+    if (this.jwtPayload.authorities === undefined) {
+      return false;
+    }
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  isAccessTokenInvalido() {
+    const token = localStorage.getItem('token');
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
   }
 
   private armazenarToken(token: string) {

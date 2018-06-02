@@ -18,7 +18,7 @@ export class FormLoginComponent {
   login(form: NgForm) {
     this.auth.login(form.value.email, form.value.senha)
         .then(() => {
-          this.router.navigate(['/pessoas'])
+          this.router.navigate(['']);
         })
         .catch(erro => {
           this.messageService.add({severity: 'error', detail: erro});
